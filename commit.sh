@@ -4,3 +4,4 @@
 # type commit in path of your project .
 comment="${1:-commit}"
 echo "The commit is with comment: $comment"
+git add $(pwd) && git commit -am $comment

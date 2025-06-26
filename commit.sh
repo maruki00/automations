@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+#---------[v1]------------
 # move it to /usr/bin/commit
 # give it the exec permission by chmod +x /usr/bin/commit
 # type commit in path of your project .
@@ -7,11 +8,29 @@
 ##echo "The commit is with comment: $comment"
 ##git add $(pwd) && git commit -am $comment
 #  -------> New Version
+#---------[v2]--------
+# comment="commit"
+# if [ $# -eq 1 ] ; then
+#     comment=$1
+# fi
+# echo "Commit with ["$comment"] comment."
+# echo "Script executed from: $(pwd)"
+# git add $(pwd) && git commit -a -m $comment
+#---------[v3]---------
 comment="commit"
+path=$(pwd)
+
+if [ $# -eq 2 ] ; then
+   path=$1
+   comment=$2
+fi
+
 if [ $# -eq 1 ] ; then
     comment=$1
-fi
-echo "Commit with ["$comment"] comment."
-echo "Script executed from: $(pwd)"
-git add $(pwd) && git commit -a -m $comment
+fi 
 
+echo "Commit with ["$comment"] comment."
+
+echo "Script executed from: $(pwd)"
+
+git add $path && git commit -a -m $comment

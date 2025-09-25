@@ -35,10 +35,14 @@
 #---------[V4]---------
 find $(pwd) -type f -iname "*.*" | while read -r file; do          
     if [[ -n $(git status --porcelain "$file") ]]; then         
-        git add "$file";                  
-        git commit -m "Add or update $(basename "$file")";                  
+        git add "$file";   
+        if git status "$file" | grep -q "modified:"; then
+            git commit -m "Update $(basename "$file")"; 
+        else
+            git commit -m "Add $(basename "$file")"; 
+        fi           
         echo "Committed: $file";          
-    else                  
-        echo "Skipping (already committed and unchanged): $file";          
+    # else                  
+    #     echo "Skipping (already committed and unchanged): $file";          
     fi;  
 done

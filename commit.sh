@@ -41,8 +41,9 @@ find $(pwd) -type f -iname "*.*" | while read -r file; do
         else
             git commit -m "Add $(basename "$file")"; 
         fi           
-        echo "Committed: $file";          
-    # else                  
-    #     echo "Skipping (already committed and unchanged): $file";          
+        echo "\nCommitted: $file";          
+     else                  
+         #echo "Skipping (already committed and unchanged): $file";          
+         echo -ne  ".";          
     fi;  
 done
